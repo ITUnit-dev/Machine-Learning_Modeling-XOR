@@ -1,4 +1,4 @@
-<p>commands for terminal:</p>
+# commands for terminal:
 ```
 npm install
 node index.js
