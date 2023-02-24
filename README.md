@@ -5,5 +5,5 @@ Basic machine learning problem using TensorFlow.js.
 ## Usage
 ```
 npm install
-node index.js
+npm start
 ```
