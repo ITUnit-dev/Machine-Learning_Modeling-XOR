@@ -5,15 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script> --> 
+    <script src="tf-vis.js"></script>
     <script src="tf.js"></script>
-    <script src="./index.js"></script>
 </head>
 <body>
     <h1 style="text-align: center;">Press F12 or open DevTools on Settings</h1>
-    <h2 style="text-align: center;">Процесс обучения, представленный ниже, добавлен автором для удобства просмотра!</h2>
+    <!-- <h2 style="text-align: center;">Процесс обучения, представленный ниже, добавлен автором для удобства просмотра!</h2> -->
+    <form class="count-units" id="units" onsubmit="return false">
+        <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR</legend>
+        <ul class="count-units-list">
+            <li class="count-units-item">
+                <label class="count-units-input">
+                    <span class="count-units-input-title">Введите количество нейронов входного слоя:</span>
+                    <input class="count-units-input-value" type="number" id="units-input-value" value="2" min="1">
+                </label>
+            </li>
+            <li class="count-units-item">
+                <label class="count-units-output">
+                    <span class="count-units-output-title">Введите количество нейронов выходного слоя:</span>
+                    <input class="count-units-output-value" type="number" id="units-output-value" value="1" min="1">
+                </label>
+            </li>
+            <li class="count-units-item">
+                <span>Каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]</span>
+            </li>
+            <li class="count-units-item">
+                <label class="count-units-epohs">
+                    <span class="count-units-epohs-title">Введите количество эпох:</span>
+                    <input class="count-units-epohs-value" type="number" id="units-epohs-value" value="10" min="1">
+                </label>
+            </li>
+        </ul>
+        <button type="submit" onclick="go()">Обучить заново</button>
+    </form>
+    <div class="messages"></div>
 </body>
-<script>
-    go();
-</script>
+<script src="./index.js"></script>
 </html>

@@ -20,6 +20,6 @@ await model.fit(training_data, target_data,
         }
     }
 );
-model.predict(training_data).print()
+model.predict(tf.tensor2d([1,0], [1,2])).print()
 }
 go();
