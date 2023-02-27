@@ -5,7 +5,19 @@ async function go() {
   let units_input = Number(document.querySelector("#units-input-value").value)
   let units_output = Number(document.querySelector("#units-output-value").value)
   let count_epohs = Number(document.querySelector("#units-epohs-value").value)
+  let batchSize_value = Number(document.querySelector("#units-batchSize-value").value)
   let messages = document.querySelector(".messages")
+  
+  let weight_1_1_1 = document.querySelector(".weight_1_1_1_change")
+  let weight_1_1_2 = document.querySelector(".weight_1_1_2_change")
+  let weight_1_2_1 = document.querySelector(".weight_1_2_1_change")
+  let weight_1_2_2 = document.querySelector(".weight_1_2_2_change")
+  let weight_2_1_1 = document.querySelector(".weight_2_1_1_change")
+  let weight_2_1_2 = document.querySelector(".weight_2_1_2_change")
+
+  let bias_1_1_1 = document.querySelector(".bias_1_1_1_change")
+  let bias_1_1_2 = document.querySelector(".bias_1_1_2_change")
+  let bias_2_1_1 = document.querySelector(".bias_2_1_1_change")
 
   messages.innerHTML = ""  // необходимо пофиксить процесс отображения       <!--   !!!   -->
   const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
@@ -31,18 +43,23 @@ async function go() {
 
   await model.fit(training_data, target_data,
       { epochs: count_epohs,
-        batchSize: 32,
+        batchSize: batchSize_value,
         verbose: false,
           callbacks: [{
               onEpochEnd: async(epochs, logs) => {
-                console.log("------------------------------------------------")
-                // model.layers[0].getWeights()[0].print()
-                // model.layers[0].getWeights()[1].print()
-                //console.log(model.getWeights().length)
-                for (let i = 0; i < model.getWeights().length; i++) {
-                  //console.log(model.getWeights()[i].dataSync())  // более подробная информация
-                  model.getWeights()[i].print()
-              }
+                weight_1_1_1.innerText = model.getWeights()[0].dataSync()[0]
+                weight_1_1_2.innerText = model.getWeights()[0].dataSync()[1]
+                weight_1_2_1.innerText = model.getWeights()[0].dataSync()[2]
+                weight_1_2_2.innerText = model.getWeights()[0].dataSync()[3]
+
+                bias_1_1_1.innerText = model.getWeights()[1].dataSync()[0]
+                bias_1_1_2.innerText = model.getWeights()[1].dataSync()[1]
+
+                weight_2_1_1.innerText = model.getWeights()[2].dataSync()[0]
+                weight_2_1_2.innerText = model.getWeights()[2].dataSync()[1]
+
+                bias_2_1_1.innerText = model.getWeights()[3].dataSync()[0]
+
                 let p = document.createElement("p")
                 //console.log("Эпоха: " + ((epochs)+1) + " Потери: " + logs.loss)
                 p.textContent = `Эпоха: ${((epochs)+1)} Потери: ${logs.loss}`

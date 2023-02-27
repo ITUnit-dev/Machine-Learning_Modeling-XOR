@@ -1,5 +1,40 @@
+html {
+    margin-right: 550px;
+}
+body {
+    background-color: #242424;
+    margin-left:auto;
+    margin-right:auto;
+}
+.main {
+    color: azure;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "main_title main_title"
+                         "count_units count_units"
+                         "perceptron perceptron_logs"
+                         "perceptron perceptron_logs"
+                         "messages messages";
+    align-items: center;
+    justify-items: center;
+    gap: 20px;
+}
+.main-title {
+    text-align: center;
+    grid-area: main_title;
+}
+.count-units {
+    grid-area: count_units;
+}
+.perceptron {
+    grid-area: perceptron;
+}
+.perceptron-logs {
+    grid-area: perceptron_logs;
+}
 .messages {
     height: 500px;
-    width: 500px;
+    width: 300px;
     overflow: auto;
+    grid-area: messages;
 }

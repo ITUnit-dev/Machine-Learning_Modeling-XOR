@@ -11,36 +11,67 @@
     <script src="API/tf.js"></script>
 </head>
 <body>
-    <h1 style="text-align: center;">Press F12 or open DevTools on Settings</h1>
-    <!-- <h2 style="text-align: center;">Процесс обучения, представленный ниже, добавлен автором для удобства просмотра!</h2> -->
-    <form class="count-units" id="units" onsubmit="return false">
-        <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR</legend>
-        <ul class="count-units-list">
-            <li class="count-units-item">
-                <label class="count-units-input">
-                    <span class="count-units-input-title">Введите количество нейронов входного слоя:</span>
-                    <input class="count-units-input-value" type="number" id="units-input-value" value="2" min="1">
-                </label>
-            </li>
-            <li class="count-units-item">
-                <label class="count-units-output">
-                    <span class="count-units-output-title">Введите количество нейронов выходного слоя:</span>
-                    <input class="count-units-output-value" type="number" id="units-output-value" value="1" min="1">
-                </label>
-            </li>
-            <li class="count-units-item">
-                <span>Каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]</span>
-            </li>
-            <li class="count-units-item">
-                <label class="count-units-epohs">
-                    <span class="count-units-epohs-title">Введите количество эпох:</span>
-                    <input class="count-units-epohs-value" type="number" id="units-epohs-value" value="10" min="1">
-                </label>
-            </li>
-        </ul>
-        <button type="submit" onclick="go()">Обучить заново</button>
-    </form>
-    <div class="messages"></div>
+    <div class="main">
+        <h1 class="main-title">Press F12 or open DevTools on Settings</h1>
+        <!-- <h2 style="text-align: center;">Процесс обучения, представленный ниже, добавлен автором для удобства просмотра!</h2> -->
+        <form class="count-units" id="units" onsubmit="return false">
+            <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR</legend>
+            <ul class="count-units-list">
+                <li class="count-units-item">
+                    <label class="count-units-input">
+                        <span class="count-units-input-title">Введите количество нейронов входного слоя:</span>
+                        <input class="count-units-input-value" type="number" id="units-input-value" value="2" min="1">
+                    </label>
+                </li>
+                <li class="count-units-item">
+                    <label class="count-units-output">
+                        <span class="count-units-output-title">Введите количество нейронов выходного слоя:</span>
+                        <input class="count-units-output-value" type="number" id="units-output-value" value="1" min="1">
+                    </label>
+                </li>
+                <li class="count-units-item">
+                    <span>Каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]</span>
+                </li>
+                <li class="count-units-item">
+                    <label class="count-units-epohs">
+                        <span class="count-units-epohs-title">Введите количество эпох:</span>
+                        <input class="count-units-epohs-value" type="number" id="units-epohs-value" value="10" min="1">
+                    </label>
+                </li>
+                <li class="count-units-item">
+                    <label class="count-units-batchSize">
+                        <span class="count-units-batchSize-title">Введите batchSize (количество обучающих примеров за одну эпоху):</span>
+                        <input class="count-units-batchSize-value" type="number" id="units-batchSize-value" value="32" min="1">
+                    </label>
+                </li>
+            </ul>
+            <button class="submit-button" type="submit" onclick="go()">Обучить заново</button>
+        </form>
+        <div class="perceptron">
+            <img class="perceptron-image" src="/images/NN_ML.png" alt="Перцептрон с изменяющимеся весами и смещениями" width="693" height="356">
+        </div>
+        <div class="perceptron-logs">
+            <div class="multiplication_1">
+                <p class="weight_1_1_1">w<sup>(1)</sup><sub>11</sub> = <span class="weight_1_1_1_change"></span></p>
+                <p class="weight_1_1_2">w<sup>(1)</sup><sub>12</sub> = <span class="weight_1_1_2_change"></span></p>
+                <p class="weight_1_2_1">w<sup>(1)</sup><sub>21</sub> = <span class="weight_1_2_1_change"></span></p>
+                <p class="weight_1_2_2">w<sup>(1)</sup><sub>22</sub> = <span class="weight_1_2_2_change"></span></p>
+            </div>
+            <div class="bias_1">
+                <p class="bias_1_1">bias<sup>(1)</sup><sub>11</sub> = <span class="bias_1_1_1_change"></span></p>
+                <p class="bias_1_2">bias<sup>(1)</sup><sub>12</sub> = <span class="bias_1_1_2_change"></span></p>
+            </div>
+            <div class="multiplication_2">
+                <p class="weight_2_1_1">w<sup>(2)</sup><sub>11</sub> = <span class="weight_2_1_1_change"></span></p>
+                <p class="weight_2_1_2">w<sup>(2)</sup><sub>12</sub> = <span class="weight_2_1_2_change"></span></p>
+            </div>
+            <div class="bias_2">
+                <p class="bias_2_1">bias<sup>(2)</sup><sub>11</sub> = <span class="bias_2_1_1_change"></span></p>
+            </div>
+        </div>
+        <div class="messages"></div>
+    </div>
 </body>
 <script src="./index.js"></script>
+<script src="./service_button.js" defer></script>
 </html>
