@@ -61,7 +61,6 @@ async function go() {
                 bias_2_1_1.innerText = model.getWeights()[3].dataSync()[0]
 
                 let p = document.createElement("p")
-                //console.log("Эпоха: " + ((epochs)+1) + " Потери: " + logs.loss)
                 p.textContent = `Эпоха: ${((epochs)+1)} Потери: ${logs.loss}`
                 messages.append(p)
               }
