@@ -12,20 +12,19 @@
 </head>
 <body>
     <div class="main">
-        <h1 class="main-title">Press F12 or open DevTools on Settings</h1>
-        <!-- <h2 style="text-align: center;">Процесс обучения, представленный ниже, добавлен автором для удобства просмотра!</h2> -->
+        <h1 class="main-title">Нейронная сеть для логической операции XOR</h1>
         <form class="count-units" id="units" onsubmit="return false">
-            <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR</legend>
+            <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR:</legend>
             <ul class="count-units-list">
                 <li class="count-units-item">
                     <label class="count-units-input">
-                        <span class="count-units-input-title">Введите количество нейронов входного слоя:</span>
+                        <span class="count-units-input-title">Количество нейронов входного слоя:</span>
                         <input class="count-units-input-value" type="number" id="units-input-value" value="2" min="1">
                     </label>
                 </li>
                 <li class="count-units-item">
                     <label class="count-units-output">
-                        <span class="count-units-output-title">Введите количество нейронов выходного слоя:</span>
+                        <span class="count-units-output-title">Количество нейронов выходного слоя:</span>
                         <input class="count-units-output-value" type="number" id="units-output-value" value="1" min="1">
                     </label>
                 </li>
@@ -34,14 +33,54 @@
                 </li>
                 <li class="count-units-item">
                     <label class="count-units-epohs">
-                        <span class="count-units-epohs-title">Введите количество эпох:</span>
+                        <span class="count-units-epohs-title">Количество эпох:</span>
                         <input class="count-units-epohs-value" type="number" id="units-epohs-value" value="10" min="1">
                     </label>
                 </li>
                 <li class="count-units-item">
                     <label class="count-units-batchSize">
-                        <span class="count-units-batchSize-title">Введите batchSize (количество обучающих примеров за одну эпоху):</span>
+                        <span class="count-units-batchSize-title">BatchSize (количество обучающих примеров за одну эпоху):</span>
                         <input class="count-units-batchSize-value" type="number" id="units-batchSize-value" value="32" min="1">
+                    </label>
+                </li>
+                <li class="count-units-item">
+                    <label class="count-units-activation">
+                        <span class="count-units-activation-title">Функция активации:</span>
+                        <select class="count-units-activation-list">
+                            <option class="count-units-activation-item" value="sigmoid" selected>sigmoid</option>
+                            <option class="count-units-activation-item" value="relu">relu</option>
+                            <option class="count-units-activation-item" value="relu6">relu6</option>
+                            <option class="count-units-activation-item" value="softmax">softmax</option>
+                            <option class="count-units-activation-item" value="softplus">softplus</option>
+                            <option class="count-units-activation-item" value="tanh">tanh</option>
+                            <option class="count-units-activation-item" value="linear">linear</option>
+                            <option class="count-units-activation-item" value="softsign">softsign</option>
+                            <option class="count-units-activation-item" value="hardSigmoid">hardSigmoid</option>
+                            <option class="count-units-activation-item" value="swish">swish</option>
+                            <option class="count-units-activation-item" value="mish">mish</option>
+                        </select>
+                    </label>
+                </li>
+                <li class="count-units-item">
+                    <label class="count-units-optimizer">
+                        <span class="count-units-optimizer-title">Оптимизатор:</span>
+                        <select class="count-units-optimizer-list">
+                            <option class="count-units-optimizer-item" value="sgd" selected>sgd</option>
+                            <option class="count-units-optimizer-item" value="adagrad">adagrad</option>
+                            <option class="count-units-optimizer-item" value="adadelta">adadelta</option>
+                            <option class="count-units-optimizer-item" value="adam">adam</option>
+                            <option class="count-units-optimizer-item" value="adamax">adamax</option>
+                            <option class="count-units-optimizer-item" value="rmsprop">rmsprop</option>
+                        </select>
+                    </label>
+                </li>
+                <li class="count-units-item">
+                    <label class="count-units-loss">
+                        <span class="count-units-loss-title">Функция потерь:</span>
+                        <select class="count-units-loss-list">
+                            <option class="count-units-loss-item" value="meanSquaredError" selected>meanSquaredError</option>
+                            <option class="count-units-loss-item" value="binaryCrossentropy">binaryCrossentropy</option>
+                        </select>
                     </label>
                 </li>
             </ul>

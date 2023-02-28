@@ -32,6 +32,16 @@ body {
     margin-left:auto;
     margin-right:auto;
 }
+input {
+    font-size: inherit;
+    width: 100px;
+    border-radius: 8px;
+}
+select {
+    font-size: inherit;
+    width: 200px;
+    border-radius: 8px;
+}
 .main {
     color: azure;
     display: grid;
@@ -50,15 +60,28 @@ body {
     text-align: center;
     grid-area: main_title;
 }
+.count-units-title {
+    font-size: 35px;
+}
 .count-units {
     grid-area: count_units;
     text-align: center;
+    background-color: #374879;
+    padding: 30px;
+    border-radius: 20px;
 }
 .count-units-list {
     list-style: none;
 }
+.count-units-item {
+    margin-bottom: 15px;
+}
+.count-units-loss-list {
+    width: 300px;
+}
 .perceptron {
     grid-area: perceptron;
+    padding-left: 10px;
 }
 .perceptron-logs {
     grid-area: perceptron_logs;
@@ -75,7 +98,7 @@ body {
     grid-template-areas: "multiplication_1 bias_1 multiplication_2 bias_2";
     align-items: center;
     justify-items: center;
-    font-size: 20px;
+    font-size: 23px;
 }
 .multiplication_1 {
     grid-area: multiplication_1;
@@ -91,4 +114,12 @@ body {
 }
 .submit-button {
     font-size: inherit;
+    padding: 15px 25px;
+    background-color: #E0B92D;
+    border-radius: 15px;
+    border-color: transparent;
+}
+.submit-button:hover {
+    color: azure;
+    transition: .3s;
 }

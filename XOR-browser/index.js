@@ -6,6 +6,9 @@ async function go() {
   let units_output = Number(document.querySelector("#units-output-value").value)
   let count_epohs = Number(document.querySelector("#units-epohs-value").value)
   let batchSize_value = Number(document.querySelector("#units-batchSize-value").value)
+  let select_form_activation = document.querySelector(".count-units-activation-list").value
+  let select_form_optimizer = document.querySelector(".count-units-optimizer-list").value
+  let select_form_loss = document.querySelector(".count-units-loss-list").value
   let messages = document.querySelector(".messages")
   
   let weight_1_1_1 = document.querySelector(".weight_1_1_1_change")
@@ -22,10 +25,11 @@ async function go() {
   messages.innerHTML = ""  // необходимо пофиксить процесс отображения       <!--   !!!   -->
   const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
   const target_data = tf.tensor2d([[0],[1],[1],[0]]);
-
+  console.log(select_form_activation)
+  console.log(select_form_optimizer)
   const model = tf.sequential();  //  последовательность слоев
-  model.add(tf.layers.dense({units: units_input, activation: 'sigmoid', inputShape: [2]}));    // units - количество нейронов;  inputShape - форма ожидаемых данных
-  model.add(tf.layers.dense({ units: units_output, activation: 'sigmoid' }));                   // так как у нас каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]
+  model.add(tf.layers.dense({units: units_input, activation: select_form_activation, inputShape: [2]}));    // units - количество нейронов;  inputShape - форма ожидаемых данных
+  model.add(tf.layers.dense({units: units_output, activation: select_form_activation}));                   // так как у нас каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]
   // Этот код необходим для работы и корректного отбражения tf.js-vis
   const surface = { name: 'Model Summary', tab: 'Model Inspection'};
   tfvis.show.modelSummary(surface, model);
@@ -38,9 +42,8 @@ async function go() {
   const surface4 = { name: 'show.fitCallbacks', tab: 'Training' };
   // ----------------------------------------------------------------
   
-  model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});     // meanSquaredError - среднеквадратическая ошибка; sgd - стохастический градиентный спуск
-  //model.compile({ optimizer: 'sgd', loss: 'binaryCrossentropy', lr: 0.1 });  
-
+  model.compile({loss: select_form_loss, optimizer: select_form_optimizer});     // meanSquaredError - среднеквадратическая ошибка; sgd - стохастический градиентный спуск
+  
   await model.fit(training_data, target_data,
       { epochs: count_epohs,
         batchSize: batchSize_value,
