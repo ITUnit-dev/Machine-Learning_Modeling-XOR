@@ -83,6 +83,12 @@
                         </select>
                     </label>
                 </li>
+                <li class="count-units-item">
+                    <label class="count-units-save">
+                        <span class="count-units-save-title">Сохранить модель по окончании обучения:</span>
+                        <input class="count-units-save-value" type="checkbox" id="units-save-value">
+                    </label>
+                </li>
             </ul>
             <button class="submit-button" type="submit" onclick="go()">Обучить заново</button>
         </form>
@@ -109,6 +115,32 @@
             </div>
         </div>
         <div class="messages"></div>
+        <div class="load-model">
+            <h2 class="load-model-title">Загрузите вашу модель нейронной сети и попробуйте её на практике!</h2>
+                <div class="load-model-grid">
+                    <form class="load-model-form" onsubmit="return false;">
+                        <label class="load-model-input-json">
+                            <span class="load-model-input-json-text">Выберите файл model.json:</span>
+                            <input class="load-model-input-json-value" type="file" id="upload-json" name="json">
+                        </label>
+                        <label class="load-model-input-json">
+                            <span class="load-model-input-json-text">Выберите файл model.weights.bin:</span>
+                            <input class="load-model-input-json-value" type="file" id="upload-weights" name="weights">
+                        </label>
+                        <button class="submit-button load" type="submit" onclick="load_model()">Загрузить!</button>
+                    </form>
+                    <form class="test-model" onsubmit="return false;">
+                        <label class="test-model-value">
+                            <span class="test-model-value-title">Выберите ноль или единицу:</span>
+                            <input class="test-model-value-1-input" type="number" min="0" max="1" value="0">
+                            <input class="test-model-value-2-input" type="number" min="0" max="1" value="1">
+                        </label>
+                        <button class="submit-button" type="submit" onclick="predict()">Показать результат!</button>
+                        <p class="print-result">Полученное значение: </p>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="./index.js"></script>

@@ -50,7 +50,8 @@ select {
                          "count_units count_units"
                          "perceptron messages"
                          "perceptron messages"
-                         "perceptron_logs perceptron_logs";
+                         "perceptron_logs perceptron_logs"
+                         "save_model save_model";
     align-items: center;
     justify-items: center;
     gap: 20px;
@@ -112,6 +113,10 @@ select {
 .bias_2 {
     grid-area: bias_2;
 }
+.load-model {
+    grid-area: save_model;
+    text-align: center;
+}
 .submit-button {
     font-size: inherit;
     padding: 15px 25px;
@@ -122,4 +127,22 @@ select {
 .submit-button:hover {
     color: azure;
     transition: .3s;
+}
+.count-units-save-value {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+.count-units-save-title {
+    text-align: center;
+    vertical-align: middle;
+}
+.load-model-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.load-model-input-json-value {
+    width: initial;
 }

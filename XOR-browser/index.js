@@ -5,10 +5,13 @@ async function go() {
   let units_input = Number(document.querySelector("#units-input-value").value)
   let units_output = Number(document.querySelector("#units-output-value").value)
   let count_epohs = Number(document.querySelector("#units-epohs-value").value)
+  let save_model = document.querySelector("#units-save-value")
   let batchSize_value = Number(document.querySelector("#units-batchSize-value").value)
+
   let select_form_activation = document.querySelector(".count-units-activation-list").value
   let select_form_optimizer = document.querySelector(".count-units-optimizer-list").value
   let select_form_loss = document.querySelector(".count-units-loss-list").value
+
   let messages = document.querySelector(".messages")
   
   let weight_1_1_1 = document.querySelector(".weight_1_1_1_change")
@@ -25,8 +28,6 @@ async function go() {
   messages.innerHTML = ""  // необходимо пофиксить процесс отображения       <!--   !!!   -->
   const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
   const target_data = tf.tensor2d([[0],[1],[1],[0]]);
-  console.log(select_form_activation)
-  console.log(select_form_optimizer)
   const model = tf.sequential();  //  последовательность слоев
   model.add(tf.layers.dense({units: units_input, activation: select_form_activation, inputShape: [2]}));    // units - количество нейронов;  inputShape - форма ожидаемых данных
   model.add(tf.layers.dense({units: units_output, activation: select_form_activation}));                   // так как у нас каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]
@@ -71,5 +72,34 @@ async function go() {
           tfvis.show.fitCallbacks(surface4, ['loss', 'acc'])]
       }
   )
+  if(save_model.checked) {
+    await model.save('downloads://');
+  }
 }
 go()
+
+let load_model = async () => {
+  let uploadJSONInput = document.getElementById("upload-json").value
+  let uploadWeightsInput = document.getElementById("upload-weights").value
+  if (uploadJSONInput.indexOf(".json") != -1 && uploadWeightsInput.indexOf(".weights.bin") != -1) {
+
+  }
+}
+
+let predict = async () => {
+  let uploadJSONInput = document.getElementById("upload-json")
+  let uploadWeightsInput = document.getElementById("upload-weights")
+  let test_value_1 = document.querySelector(".test-model-value-1-input")
+  let test_value_2 = document.querySelector(".test-model-value-2-input")
+  let print_result = document.querySelector(".print-result")
+  const model = await tf.loadLayersModel(tf.io.browserFiles([uploadJSONInput.files[0], uploadWeightsInput.files[0]]))
+  let result = model.predict(tf.tensor2d([[test_value_1,test_value_2]])).arraySync()[0][0].toFixed(3)
+  print_result.innerText = "Полученное значение: " + result;
+}
+
+let submit_save = document.querySelector(".load")
+submit_save.addEventListener("click", () => {
+  submit_save.style.backgroundColor = "green"
+  submit_save.style.color = "azure"
+  submit_save.innerText = "Загружено!"
+}, false)
