@@ -17,14 +17,7 @@ async function go() {
         verbose: false,
           callbacks: {
               onEpochEnd: async(epochs, logs) => {
-                console.log("------------------------------------------------")
-                // model.layers[0].getWeights()[0].print()
-                // model.layers[0].getWeights()[1].print()
-                //console.log(model.getWeights().length)
-                for (let i = 0; i < model.getWeights().length; i++) {
-                  //console.log(model.getWeights()[i].dataSync())  // более подробная информация
-                  model.getWeights()[i].print()
-                }
+                console.log("Эпоха: " + ((epochs)+1) + " Потери: " + logs.loss);
               }
           }
       }

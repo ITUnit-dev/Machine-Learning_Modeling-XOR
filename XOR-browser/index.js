@@ -1,7 +1,4 @@
 async function go() {
-
-  console.clear() // очищаем консоль браузера
-
   let units_input = Number(document.querySelector("#units-input-value").value)
   let units_output = Number(document.querySelector("#units-output-value").value)
   let count_epohs = Number(document.querySelector("#units-epohs-value").value)
@@ -11,6 +8,12 @@ async function go() {
   let select_form_activation = document.querySelector(".count-units-activation-list").value
   let select_form_optimizer = document.querySelector(".count-units-optimizer-list").value
   let select_form_loss = document.querySelector(".count-units-loss-list").value
+
+  let changed_mode_selection_json = document.querySelector(".changed-mode-selection-json")
+  let changed_mode_selection_bin = document.querySelector(".changed-mode-selection-bin")
+  let uploadJSONInput = document.getElementById("upload-json")
+  let uploadWeightsInput = document.getElementById("upload-weights")
+  let submit_save = document.querySelector(".load")
 
   let messages = document.querySelector(".messages")
   
@@ -24,6 +27,24 @@ async function go() {
   let bias_1_1_1 = document.querySelector(".bias_1_1_1_change")
   let bias_1_1_2 = document.querySelector(".bias_1_1_2_change")
   let bias_2_1_1 = document.querySelector(".bias_2_1_1_change")
+
+  uploadJSONInput.addEventListener("change", () => {
+    changed_mode_selection_json.style.backgroundColor = "white"
+    changed_mode_selection_json.style.color = "green"
+    changed_mode_selection_json.innerText = "Выбрано!"
+    
+  }, false)
+  uploadWeightsInput.addEventListener("change", () => {
+    changed_mode_selection_bin.style.backgroundColor = "white"
+    changed_mode_selection_bin.style.color = "green"
+    changed_mode_selection_bin.innerText = "Выбрано!"
+    
+  }, false)
+  submit_save.addEventListener("click", () => {
+    submit_save.style.backgroundColor = "white"
+    submit_save.style.color = "green"
+    submit_save.innerText = "Загружено!"
+}, false)
 
   messages.innerHTML = ""  // необходимо пофиксить процесс отображения       <!--   !!!   -->
   const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
@@ -85,21 +106,25 @@ let load_model = async () => {
 
   }
 }
-
 let predict = async () => {
+  let changed_mode_selection_json = document.querySelector(".changed-mode-selection-json")
+  let changed_mode_selection_bin = document.querySelector(".changed-mode-selection-bin")
   let uploadJSONInput = document.getElementById("upload-json")
   let uploadWeightsInput = document.getElementById("upload-weights")
+  let submit_save = document.querySelector(".load")
   let test_value_1 = document.querySelector(".test-model-value-1-input")
   let test_value_2 = document.querySelector(".test-model-value-2-input")
   let print_result = document.querySelector(".print-result")
   const model = await tf.loadLayersModel(tf.io.browserFiles([uploadJSONInput.files[0], uploadWeightsInput.files[0]]))
   let result = model.predict(tf.tensor2d([[test_value_1,test_value_2]])).arraySync()[0][0].toFixed(3)
-  print_result.innerText = "Полученное значение: " + result;
+  print_result.innerText = "Полученное значение: " + Math.abs(result);
+  changed_mode_selection_json.style.backgroundColor = "#E0B92D"
+  changed_mode_selection_json.style.color = "black"
+  changed_mode_selection_json.innerText = "Не выбрано!"
+  changed_mode_selection_bin.style.backgroundColor = "#E0B92D"
+  changed_mode_selection_bin.style.color = "black"
+  changed_mode_selection_bin.innerText = "Не выбрано!"
+  submit_save.style.backgroundColor = "#E0B92D"
+  submit_save.style.color = "black"
+  submit_save.innerText = "Загрузить!"
 }
-
-let submit_save = document.querySelector(".load")
-submit_save.addEventListener("click", () => {
-  submit_save.style.backgroundColor = "green"
-  submit_save.style.color = "azure"
-  submit_save.innerText = "Загружено!"
-}, false)

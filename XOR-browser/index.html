@@ -13,6 +13,7 @@
 <body>
     <div class="main">
         <h1 class="main-title">Нейронная сеть для логической операции XOR</h1>
+        <a class="reload-page" href="./index.html"><span class="visually-hidden">Перезагрузить страницу!</span><img class="reload-image" src="../images/reload.png" width="50px" alt="Перезагрузка"></a>
         <form class="count-units" id="units" onsubmit="return false">
             <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR:</legend>
             <ul class="count-units-list">
@@ -121,17 +122,19 @@
                     <form class="load-model-form" onsubmit="return false;">
                         <label class="load-model-input-json">
                             <span class="load-model-input-json-text">Выберите файл model.json:</span>
+                            <span class="load-model-input-json-span changed-mode-selection-json">Не выбрано!</span>
                             <input class="load-model-input-json-value" type="file" id="upload-json" name="json">
                         </label>
                         <label class="load-model-input-json">
                             <span class="load-model-input-json-text">Выберите файл model.weights.bin:</span>
+                            <span class="load-model-input-json-span changed-mode-selection-bin">Не выбрано!</span>
                             <input class="load-model-input-json-value" type="file" id="upload-weights" name="weights">
                         </label>
-                        <button class="submit-button load" type="submit" onclick="load_model()">Загрузить!</button>
+                        <button class="submit-button load changed-mode-selection-button" type="submit" onclick="load_model()">Загрузить!</button>
                     </form>
                     <form class="test-model" onsubmit="return false;">
                         <label class="test-model-value">
-                            <span class="test-model-value-title">Выберите ноль или единицу:</span>
+                            <span class="test-model-value-title">Выберите проверочные значения:</span>
                             <input class="test-model-value-1-input" type="number" min="0" max="1" value="0">
                             <input class="test-model-value-2-input" type="number" min="0" max="1" value="1">
                         </label>

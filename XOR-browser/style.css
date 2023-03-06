@@ -143,6 +143,44 @@ select {
     flex-direction: column;
     align-items: center;
 }
+.load-model-input-json {
+    margin-bottom: 25px;
+    font-size: 30px;
+}
 .load-model-input-json-value {
-    width: initial;
+    display: none;   
+}
+.load-model-input-json-span {
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 15px;
+    background-color: #E0B92D;
+    color: black;
+    width: 170px;
+}
+.load-model-input-json-span:hover {
+    color: azure;
+    transition: .3s;
+}
+.changed-mode-selection-button {
+    display: inline-block;
+    width: 182px;
+}
+.visually-hidden {
+    display: none;
+}
+.reload-page {
+    position: fixed;
+    bottom: 50px;
+    right: 600px;
+    background-color: #E0B92D;
+    border-radius: 10px;
+    padding: 10px 10px;
+}
+.reload-page:hover {
+    background-color: azure;
+    transition: .3s;
+}
+.load {
+    display: none;   /*  need fix  */
 }
