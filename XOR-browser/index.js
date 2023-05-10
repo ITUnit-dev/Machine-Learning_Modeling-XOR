@@ -28,6 +28,19 @@ async function go() {
   let bias_1_1_2 = document.querySelector(".bias_1_1_2_change")
   let bias_2_1_1 = document.querySelector(".bias_2_1_1_change")
 
+  let weight_1_1_1_input = document.querySelector("#weight_1_1_1_input")
+  let weight_1_1_2_input = document.querySelector("#weight_1_1_2_input")
+  let weight_1_2_1_input = document.querySelector("#weight_1_2_1_input")
+  let weight_1_2_2_input = document.querySelector("#weight_1_2_2_input")
+  let weight_2_1_1_input = document.querySelector("#weight_2_1_1_input")
+  let weight_2_1_2_input = document.querySelector("#weight_2_1_2_input")
+
+  let bias_1_1_1_input = document.querySelector("#bias_1_1_1_input")
+  let bias_1_1_2_input = document.querySelector("#bias_1_1_2_input")
+  let bias_2_1_1_input = document.querySelector("#bias_2_1_1_input")
+
+  let toggle_class = document.querySelector("#toggleClass")
+
   uploadJSONInput.addEventListener("change", () => {
     changed_mode_selection_json.style.backgroundColor = "white"
     changed_mode_selection_json.style.color = "green"
@@ -46,9 +59,21 @@ async function go() {
     submit_save.innerText = "Загружено!"
 }, false)
 
-  messages.innerHTML = ""  // необходимо пофиксить процесс отображения       <!--   !!!   -->
-  const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
-  const target_data = tf.tensor2d([[0],[1],[1],[0]]);
+  messages.innerHTML = ""
+  let training_data;
+  let target_data;
+  const training_dataJson = document.getElementById("inputData").value;
+  if (training_dataJson == "") {
+    training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
+  } else {
+    training_data = tf.tensor2d(JSON.parse(training_dataJson));
+  }
+  const target_dataJson = document.getElementById("outputData").value;
+  if (target_dataJson == "") {
+    target_data = tf.tensor2d([[0],[1],[1],[0]]);
+  } else {
+    target_data = tf.tensor2d(JSON.parse(target_dataJson));
+  }
   const model = tf.sequential();  //  последовательность слоев
   model.add(tf.layers.dense({units: units_input, activation: select_form_activation, inputShape: [2]}));    // units - количество нейронов;  inputShape - форма ожидаемых данных
   model.add(tf.layers.dense({units: units_output, activation: select_form_activation}));                   // так как у нас каждый входной экземпляр представлен вектором из двух значений X1 и X2, поэтому inputShape=[2]
@@ -63,9 +88,21 @@ async function go() {
   await tfvis.show.valuesDistribution(surface3, target_data);
   const surface4 = { name: 'show.fitCallbacks', tab: 'Training' };
   // ----------------------------------------------------------------
+    model.compile({loss: select_form_loss, optimizer: select_form_optimizer}); 
+    if (toggle_class.classList.contains("show")) {
+      model.getWeights()[0].dataSync()[0] = weight_1_1_1_input.value;
+      model.getWeights()[0].dataSync()[1] = weight_1_1_2_input.value;
+      model.getWeights()[0].dataSync()[2] = weight_1_2_1_input.value;
+      model.getWeights()[0].dataSync()[3] = weight_1_2_2_input.value;
   
-  model.compile({loss: select_form_loss, optimizer: select_form_optimizer});     // meanSquaredError - среднеквадратическая ошибка; sgd - стохастический градиентный спуск
+      model.getWeights()[1].dataSync()[0] = bias_1_1_1_input.value;
+      model.getWeights()[1].dataSync()[1] = bias_1_1_2_input.value;
   
+      model.getWeights()[2].dataSync()[0] = weight_2_1_1_input.value;
+      model.getWeights()[2].dataSync()[1] = weight_2_1_2_input.value;
+      
+      model.getWeights()[3].dataSync()[0] = bias_2_1_1_input.value;
+    }
   await model.fit(training_data, target_data,
       { epochs: count_epohs,
         batchSize: batchSize_value,

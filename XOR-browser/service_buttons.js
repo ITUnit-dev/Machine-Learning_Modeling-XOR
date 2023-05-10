@@ -7,3 +7,11 @@ special_button_hide.addEventListener("click", () => {
 
 let special_button_maximize = document.querySelectorAll(".css-1x8bgru")[0]
 special_button_maximize.style.display = "none";
+
+let button = document.querySelector('#toggle-button');
+let hint = document.querySelector('.hint');
+
+button.addEventListener('click', function() {
+  hint.classList.toggle('show');
+  hint.classList.toggle('visible')
+});

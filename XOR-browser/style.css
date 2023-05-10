@@ -182,5 +182,30 @@ select {
     transition: .3s;
 }
 .load {
-    display: none;   /*  need fix  */
+    display: none;
 }
+textarea {
+    resize: none;
+}
+.wrapper {
+    box-sizing: border-box;
+  }
+  
+  .hint {
+    transition: all ease 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 10px;
+  }
+  
+  .show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .visible {
+    height: 0px;
+  }
+  .block-margin {
+    margin: 10px 0px;
+  }
+  

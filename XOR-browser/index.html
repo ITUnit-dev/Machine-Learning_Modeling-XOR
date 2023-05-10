@@ -12,21 +12,25 @@
 </head>
 <body>
     <div class="main">
-        <h1 class="main-title">Нейронная сеть для логической операции XOR</h1>
-        <a class="reload-page" href="./index.html"><span class="visually-hidden">Перезагрузить страницу!</span><img class="reload-image" src="../images/reload.png" width="50px" alt="Перезагрузка"></a>
+        <h1 class="main-title">Интерактивная нейронная сеть</h1>
+        <a class="reload-page" href="./index.html"><span class="visually-hidden">Перезагрузить страницу!</span><img class="reload-image" src="./images/reload.png" width="50px" alt="Перезагрузка"></a>
         <form class="count-units" id="units" onsubmit="return false">
-            <legend class="count-units-title">Параметры нейронной сети, моделирующей выполнение логической операции XOR:</legend>
+            <legend class="count-units-title">Параметры вашей нейронной сети</legend>
             <ul class="count-units-list">
+                <li>
+                    <textarea id="inputData" rows="4" cols="50" placeholder="Введите входные данные в виде массива JSON.&#10;Пример: [[0,0],[0,1],[1,0],[1,1]] - XOR"></textarea>
+                    <textarea id="outputData" rows="4" cols="50" placeholder="Введите выходные данные в виде массива JSON.&#10;Пример: [[0],[1],[1],[0]] - XOR"></textarea>
+                </li>
                 <li class="count-units-item">
                     <label class="count-units-input">
                         <span class="count-units-input-title">Количество нейронов входного слоя:</span>
-                        <input class="count-units-input-value" type="number" id="units-input-value" value="2" min="1">
+                        <input class="count-units-input-value" type="number" id="units-input-value" value="2" min="1" required>
                     </label>
                 </li>
                 <li class="count-units-item">
                     <label class="count-units-output">
                         <span class="count-units-output-title">Количество нейронов выходного слоя:</span>
-                        <input class="count-units-output-value" type="number" id="units-output-value" value="1" min="1">
+                        <input class="count-units-output-value" type="number" id="units-output-value" value="1" min="1" required>
                     </label>
                 </li>
                 <li class="count-units-item">
@@ -35,13 +39,13 @@
                 <li class="count-units-item">
                     <label class="count-units-epohs">
                         <span class="count-units-epohs-title">Количество эпох:</span>
-                        <input class="count-units-epohs-value" type="number" id="units-epohs-value" value="10" min="1">
+                        <input class="count-units-epohs-value" type="number" id="units-epohs-value" value="10" min="1" required>
                     </label>
                 </li>
                 <li class="count-units-item">
                     <label class="count-units-batchSize">
                         <span class="count-units-batchSize-title">BatchSize (количество обучающих примеров за одну эпоху):</span>
-                        <input class="count-units-batchSize-value" type="number" id="units-batchSize-value" value="32" min="1">
+                        <input class="count-units-batchSize-value" type="number" id="units-batchSize-value" value="32" min="1" required>
                     </label>
                 </li>
                 <li class="count-units-item">
@@ -91,10 +95,71 @@
                     </label>
                 </li>
             </ul>
-            <button class="submit-button" type="submit" onclick="go()">Обучить заново</button>
+            <div class="wrapper">
+                <button class="submit-button" id="toggle-button">Установить собственные веса для нейронной сети</button>
+                <div class="hint visible" id="toggleClass">
+                    <h2>Заполните все значения и нажмите кнопку "Обучить заново"</h2>
+                    <div class="perceptron-logs block-margin">
+                        <div class="multiplication_1">
+                           <div>
+                                <label class="weight_1_1_1">w<sup>(1)</sup><sub>11</sub> = <span class="weight_1_1_1_input"></span>
+                                    <input class="input-weight" type="text" id="weight_1_1_1_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                           </div>
+                          <div>
+                                <label class="weight_1_1_2">w<sup>(1)</sup><sub>12</sub> = <span class="weight_1_1_2_input"></span>
+                                    <input class="input-weight" type="text" id="weight_1_1_2_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                          </div>
+                           <div>
+                                <label class="weight_1_2_1">w<sup>(1)</sup><sub>21</sub> = <span class="weight_1_2_1_input"></span>
+                                    <input class="input-weight" type="text" id="weight_1_2_1_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                           </div>
+                           <div>
+                                <label class="weight_1_2_2">w<sup>(1)</sup><sub>22</sub> = <span class="weight_1_2_2_input"></span>
+                                    <input class="input-weight" type="text" id="weight_1_2_2_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                           </div>
+                        </div>
+                        <div class="bias_1">
+                            <div>
+                                <label class="bias_1_1">bias<sup>(1)</sup><sub>11</sub> = <span class="bias_1_1_1_input"></span>
+                                    <input class="input-weight" type="text" id="bias_1_1_1_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                            </div>
+                            <div>
+                                <label class="bias_1_2">bias<sup>(1)</sup><sub>12</sub> = <span class="bias_1_1_2_input"></span>
+                                    <input class="input-weight" type="text" id="bias_1_1_2_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="multiplication_2">
+                           <div>
+                                <label class="weight_2_1_1">w<sup>(2)</sup><sub>11</sub> = <span class="weight_2_1_1_input"></span>
+                                    <input class="input-weight" type="text" id="weight_2_1_1_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                           </div>
+                            <div>
+                                <label class="weight_2_1_2">w<sup>(2)</sup><sub>12</sub> = <span class="weight_2_1_2_input"></span>
+                                    <input class="input-weight" type="text" id="weight_2_1_2_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="bias_2">
+                           <div>
+                                <label class="bias_2_1">bias<sup>(2)</sup><sub>11</sub> = <span class="bias_2_1_1_input"></span>
+                                    <input class="input-weight" type="text" id="bias_2_1_1_input" pattern="^(0(\.\d+)?|1(\.0+)?)$" required />
+                                </label>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            <button class="submit-button" type="button" onclick="go()">Обучить заново</button>
         </form>
         <div class="perceptron">
-            <img class="perceptron-image" src="/images/NN_ML.png" alt="Перцептрон с изменяющимеся весами и смещениями" width="800">
+            <img class="perceptron-image" src="./images/NN_ML.png" alt="Перцептрон с изменяющимеся весами и смещениями" width="800">
         </div>
         <div class="perceptron-logs">
             <div class="multiplication_1">
